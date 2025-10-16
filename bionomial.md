@@ -1,3 +1,10 @@
+---
+layout: page
+title: "binomial expansion note"
+---
+
+{% include mathjax.html %}
+
 # Deriving e: The Binomial Expansion Method
 
 > **Goal:** Understand how $(1 + \frac{1}{n})^n$ becomes $e = 2.71828...$ as $n \to \infty$

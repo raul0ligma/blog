@@ -1,3 +1,10 @@
+---
+layout: page
+title: "notes for `e`"
+---
+
+{% include mathjax.html %}
+
 # e - Euler's Constant
 
 Jacob Bernoulli in the 17th century posed this question: if I invest £1 at 100% interest for a year, but I compound it n times throughout the year, what do I get?
