@@ -42,10 +42,9 @@ Bernoulli knew the answer was between 2 and 3, but couldn't calculate it exactly
 
 Mathematically: $e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$
 
-## Why This Limit Equals 2.718... (The Binomial Expansion)
+## How This Limit Equals 2.718... [The Binomial Expansion](./bionomial.md)
 
-- [explainer](./bionomial.md)
-  This converges to **e = 2.718281828...**
+This converges to **e = 2.718281828...**
 
 This discovery means for any rate r over time t with continuous compounding:
 $V(t) = V_0 \cdot e^{rt}$
@@ -97,7 +96,7 @@ Think about this problem: you're trying to compare different exponential process
 
 Each has a different base, different time scale. How do we compare them? How do we find a common language?
 
-Here's a fascinating observation: if you look at different exponential bases:
+Here's an observation: if you look at different exponential bases:
 
 For $2^x$:
 
@@ -151,7 +150,7 @@ Remember those proportionality constants? Let's understand them through the chai
 Consider $2^x$. We can rewrite this as:
 $$2^x = e^{x \cdot \ln(2)}$$
 
-This isn't fancy algebra - it's just asking: "e to what power gives 2?" Answer: $\ln(2)$.
+it's just asking: "e to what power gives 2?" Answer: $\ln(2)$.
 
 Now apply the chain rule:
 $$\frac{d(2^x)}{dx} = \frac{d(e^{x \cdot \ln(2)})}{dx} = e^{x \cdot \ln(2)} \cdot \ln(2) = 2^x \cdot \ln(2)$$
@@ -225,132 +224,6 @@ Total return:
 $$\ln(P_3/P_0) = \ln(m_1 \times m_2 \times m_3) = \ln(m_1) + \ln(m_2) + \ln(m_3) = r_1 + r_2 + r_3$$
 
 The log returns literally add because $\ln(a \times b) = \ln(a) + \ln(b)$.
-
-## Exponential Moving Average (EMA) and the Role of e
-
-The Exponential Moving Average is a perfect example of e in finance - it shows how we weight recent data more heavily using exponential decay.
-
-### The Basic Idea
-
-Simple Moving Average (SMA) treats all data points equally:
-$\text{SMA}_n = \frac{P_1 + P_2 + ... + P_n}{n}$
-
-But markets care more about recent information. EMA uses exponential decay to weight recent prices more heavily.
-
-### How EMA Works
-
-The EMA formula:
-$\text{EMA}_{today} = \alpha \times \text{Price}_{today} + (1-\alpha) \times \text{EMA}_{yesterday}$
-
-Where $\alpha$ is the smoothing factor: $\alpha = \frac{2}{n+1}$
-
-For a 10-day EMA: $\alpha = \frac{2}{11} \approx 0.182$
-
-### The Exponential Decay
-
-Here's where e appears. If we expand the EMA recursively:
-
-$\text{EMA} = \alpha P_0 + \alpha(1-\alpha)P_{-1} + \alpha(1-\alpha)^2 P_{-2} + \alpha(1-\alpha)^3 P_{-3} + ...$
-
-The weight for a price k days ago is: $\alpha(1-\alpha)^k$
-
-As k increases, this approaches: $\alpha \cdot e^{-\lambda k}$ where $\lambda = -\ln(1-\alpha)$
-
-### Visualization with Numbers
-
-For a 10-day EMA ($\alpha = 0.182$):
-
-- Today's price: weight = 0.182
-- Yesterday's price: weight = 0.182 × 0.818 = 0.149
-- 2 days ago: weight = 0.182 × $(0.818)^2$ = 0.122
-- 5 days ago: weight = 0.182 × $(0.818)^5$ = 0.066
-- 10 days ago: weight = 0.182 × $(0.818)^{10}$ = 0.024
-
-The weights decay exponentially!
-
-### Half-Life of Information
-
-The "half-life" - when a data point's influence drops to 50%:
-
-$(1-\alpha)^t = 0.5$
-$t = \frac{\ln(0.5)}{\ln(1-\alpha)}$
-
-For 10-day EMA: $t = \frac{-0.693}{\ln(0.818)} \approx 3.5$ days
-
-After 3.5 days, a price's influence is cut in half - showing how EMA "forgets" old information exponentially.
-
-### Why This Matters in Trading
-
-1. **Trend Following**: EMA reacts faster to price changes than SMA
-2. **Support/Resistance**: The 50-day and 200-day EMAs are key levels
-3. **MACD Indicator**: Uses the difference between 12-day and 26-day EMAs
-4. **Signal Smoothing**: Reduces noise while preserving recent trends
-
-The exponential weighting means:
-
-- Recent prices matter most (high weight)
-- Old prices fade smoothly (exponential decay)
-- No arbitrary cutoff (unlike SMA which suddenly drops old prices)
-
-This is e at work in everyday trading - creating a smooth, responsive average that naturally "forgets" old information at an exponential rate.
-
-## The Complete Picture
-
-Everything connects:
-
-1. **Continuous compounding** led us to discover e through the limit $(1 + \frac{1}{n})^n$
-
-2. **e is the equilibrium base** where value equals rate of change: $\frac{d(e^x)}{dx} = e^x$
-
-3. **This makes e the natural base** for describing growth
-
-4. **ln extracts the growth rate** from any multiplicative process
-
-5. **In finance**, prices multiply but log returns add
-
-6. **$e^{rt}$ encodes** a growth rate into a final value
-
-7. **$\ln()$ decodes** a final value back to its growth rate
-
-Think of it this way:
-
-- Markets operate continuously
-- e emerged from continuous compounding
-- Therefore e is the natural language for markets
-- Log returns measure the "continuous growth rate"
-- These rates add over time, just like distances add when you travel
-
-## Quick Rule of Thumb for APY/Rates
-
-The fundamental relationship for continuous growth:
-$\frac{\text{Final}}{\text{Initial}} = e^{rt}$
-
-To find the rate when you know initial and final values:
-$r = \frac{\ln(\text{Final}/\text{Initial})}{t}$
-
-**Example:** Your investment grew from $8,000 to $10,000 in 3 years. What was the continuous rate?
-
-$r = \frac{\ln(10000/8000)}{3} = \frac{\ln(1.25)}{3} = \frac{0.223}{3} = 0.074$
-
-So the continuous rate was 7.4% per year.
-
-**Verification:** $8000 \times e^{0.074 \times 3} = 8000 \times e^{0.223} = 8000 \times 1.25 = \$10,000$ ✓
-
-This is why traders use log returns - they directly give you the continuous growth rate!
-
-## The Mathematical Formulation
-
-Starting from your investment:
-$$\text{Original\_amount} \times e^{r_{total}} = \text{Final\_amount}$$
-
-Taking $\ln$ of both sides:
-$$\ln\left(\frac{\text{Final}}{\text{Original}}\right) = r_{total}$$
-
-Where $r_{total}$ is the sum of all period returns:
-$$r_{total} = r_1 + r_2 + r_3 + \ldots + r_n$$
-
-Each period return is:
-$$r_n = \ln\left(\frac{\text{Closing}_n}{\text{Opening}_n}\right)$$
 
 ## Core Finance Applications
 
