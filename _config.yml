@@ -1,0 +1,30 @@
+title: raul0ligma — Notes
+description: Personal notes and blog
+url: https://raul0ligma.github.io
+baseurl: /blog
+
+theme: minima
+
+minima:
+  skin: auto
+
+permalink: /:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Readme.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+
